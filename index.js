@@ -83,6 +83,14 @@ function Car(model, milesPerGallon) {
   this.odometer = 0;
 }
 
+Car.prototype.fill = function(gallons) {
+  return this.tank + gallons
+}
+
+Car.prototype.drive = function(distance) {
+ 
+}
+
 /*
   TASK 3
     - Write a Baby constructor subclassing Person.
@@ -95,7 +103,11 @@ function Baby(name, age, favoriteToy) {
   this.age = age;
   this.favoriteToy = favoriteToy;
 }
+Baby.prototype = Object.create(Person.prototype);
 
+Baby.prototype.play = function(){
+  return (`Playing with ${this.favoriteToy}`)
+}
 
 
 /* 

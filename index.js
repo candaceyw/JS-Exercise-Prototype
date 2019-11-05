@@ -81,18 +81,38 @@ function Car(model, milesPerGallon) {
   this.milesPerGallon = milesPerGallon;
   this.tank = 0;
   this.odometer = 0;
+  
 }
 
 Car.prototype.fill = function(gallons) {
   return this.tank += gallons
 }
 
+//drive distance makes odometer go up and tank goes down
+
 Car.prototype.drive = function(distance) {
-  return this.odometer += distance
-  
+  if  (this.odometer === distance){
+    return this.odometer++;
+  } if (this.odometer === distance)
+  {
+    return this.tank--
+  } 
 }
 
+// Tank should go down taking milesPerGallon into account 
+Car.prototype.fuel = function(gas) {
+    if (this.milesPerGallon <= this.odometer){
+      return this.tank -= gas
+    }
+}
 
+// A car which runs out of `fuel` while driving can't drive any more distance:
+//         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
+// Car.prototype.drive = function(fuel) {
+//   if (this.tank = 0) {
+//     return (`I ran out of fuel at ${this.odometer} miles`)
+//   }
+// }
 
 /*
   TASK 3

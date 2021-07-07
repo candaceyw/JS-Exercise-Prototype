@@ -39,9 +39,27 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
+};
 
+ Person.prototype.eat= (function(someFood) {
+   if(someFood <= 10) {
+     this.stomach.push(someFood)
+     } else if(someFood > 10) {
+         return this.stomach.poop;
+       }
+     }
+   );
+
+Person.prototype.poop = function() {
+    return this.stomach = [];
 }
+ Person.prototype.toString = function() {
+   return this.name + ', ' + this.age;
+ };
 
 /*
   TASK 2
@@ -57,9 +75,32 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
 }
+
+Car.prototype.fill = function(gallons) {
+  return this.tank += gallons
+}
+
+
+Car.prototype.drive = function(distance) {
+
+  this.odometer += distance;
+  let fuel = this.tank * this.milesPerGallon;
+  fuel -= distance;
+  this.tank = fuel / this.milesPerGallon;
+  
+   if (this.tank <= 0){
+     this.odometer -=1;
+     this.tank = 0;
+     distance = 0;
+   return `I ran out of fuel at ${this.odometer} miles`
+  }
+  } 
 
 /*
   TASK 3
@@ -68,18 +109,26 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
-
+function Baby(name, age, favoriteToy) {
+  this.name = name;
+  this.age = age;
+  this.favoriteToy = favoriteToy;
 }
+Baby.prototype = Object.create(Person.prototype);
+
+Baby.prototype.play = function(){
+  return (`Playing with ${this.favoriteToy}`)
+}
+
 
 /* 
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. .this is global biinding === the window
+  2. Implicit Binding - the method is hard coded on an object
+  3. New binding uses the keyword 'new' and refers to the instance the method is call on
+  4. Explicit binding is when call or apply method is used. When you want to change the item being called.
 */
 
 
